@@ -1,0 +1,40 @@
+import { useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
+
+type BadgeProps = {
+  name: string;
+  mutationLevel: number;
+  interactions: number;
+  id: string; // Supabase badge ID
+};
+
+export default function Badge({ name, mutationLevel, interactions, id }: BadgeProps) {
+  const [level, setLevel] = useState(mutationLevel);
+  const [clicks, setClicks] = useState(interactions);
+
+  const evolveBadge = async () => {
+    const newLevel = level + 1;
+    const newClicks = clicks + 1;
+
+    const { error } = await supabase
+      .from('badges')
+      .update({ mutation_level: newLevel, interactions: newClicks })
+      .eq('id', id);
+
+    if (!error) {
+      setLevel(newLevel);
+      setClicks(newClicks);
+    }
+  };
+
+  return (
+    <div className="border-2 rounded-lg p-4 bg-gray-900 text-white shadow-md animate-pulse border-purple-500">
+      <h2 className="text-xl font-bold mb-2">{name}</h2>
+      <p className="text-sm text-gray-400">Mutation Level: {level}</p>
+      <p className="text-sm text-gray-400">Interactions: {clicks}</p>
+      <button onClick={evolveBadge} className="mt-2 px-3 py-1 bg-purple-700 rounded hover:bg-purple-900">
+        Evolve Badge
+      </button>
+    </div>
+  );
+}
