@@ -53,3 +53,10 @@ export default function LoreFeed() {
   <p className="text-xs text-gray-500">Staked: {r.staked ? 'Yes' : 'No'} | {new Date(r.timestamp).toLocaleString()}</p>
 </li>
 }
+<select onChange={(e) => setEpochFilter(e.target.value)} className="bg-gray-800 text-white p-2 rounded mb-4">
+  <option value="">All Epochs</option>
+  <option value="Genesis">Genesis</option>
+  <option value="Collapse">Collapse</option>
+  <option value="Resurrection">Resurrection</option>
+  <option value="Omega">Omega</option>
+</select>
