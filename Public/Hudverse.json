@@ -1,0 +1,52 @@
+{
+  "protocols": [
+    {
+      "name": "Genesis",
+      "epoch": "Genesis",
+      "remixStyle": "mythpunk",
+      "mechanic": "ritual",
+      "monetization": "badge-staking"
+    },
+    {
+      "name": "Collapse",
+      "epoch": "Collapse",
+      "remixStyle": "cyberpunk",
+      "mechanic": "scarcity",
+      "monetization": "unlockable-lore"
+    },
+    {
+      "name": "Resurrection",
+      "epoch": "Resurrection",
+      "remixStyle": "solarpunk",
+      "mechanic": "time-based",
+      "monetization": "subscription"
+    },
+    {
+      "name": "Omega",
+      "epoch": "Omega",
+      "remixStyle": "mythpunk",
+      "mechanic": "ritual",
+      "monetization": "badge-staking"
+    }
+  ],
+  "modules": [
+    "Codex",
+    "Scrolls",
+    "Badges",
+    "Rituals",
+    "Lore Feed",
+    "Replay",
+    "Sigils",
+    "Oracle",
+    "Scheduler",
+    "Metrics",
+    "Spawn",
+    "Forge"
+  ],
+  "endpoints": {
+    "codex": "/api/codex",
+    "rituals": "/api/rituals",
+    "loreFeed": "/api/lore-feed",
+    "exportCodex": "/api/codex/export"
+  }
+}
