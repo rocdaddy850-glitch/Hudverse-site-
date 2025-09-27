@@ -60,3 +60,12 @@ export default function Rituals() {
     </main>
   );
 }
+create table rituals (
+  id uuid primary key default gen_random_uuid(),
+  scroll_name text not null,
+  badge_name text not null,
+  epoch text not null,
+  status text default 'active',
+  timestamp timestamptz default now(),
+  lore text
+);
