@@ -81,4 +81,16 @@ export default function OracleEcho() {
       {sound && <p className="mt-6 text-lg italic">{sound}</p>}
     </main>
   );
-}
+} 
+useEffect(() => {
+  const channel = supabase
+    .channel('rituals-updates')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rituals' }, (payload) => {
+      setEvents((prev) => [payload.new, ...prev]);
+    })
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []);
