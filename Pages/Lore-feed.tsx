@@ -47,5 +47,9 @@ export default function LoreFeed() {
         ))}
       </ul>
     </main>
-  );
+  );<li key={r.id} className="bg-gray-900 p-4 rounded shadow-lg transition-all duration-500 hover:scale-105 hover:border-yellow-500 border border-transparent">
+  <p className="text-lg font-semibold animate-pulse">{r.scroll_name}</p>
+  <p className="text-sm text-gray-400">→ {r.badge_name} {r.unlocked ? '🔓' : '🔒'}</p>
+  <p className="text-xs text-gray-500">Staked: {r.staked ? 'Yes' : 'No'} | {new Date(r.timestamp).toLocaleString()}</p>
+</li>
 }
