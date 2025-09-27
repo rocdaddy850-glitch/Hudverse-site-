@@ -15,3 +15,6 @@ export default function Badge({ name, mutationLevel, interactions }: BadgeProps)
     </div>
   );
 }
+const glow = mutationLevel > 3
+  ? 'border-purple-500 shadow-purple-500/50 animate-pulse'
+  : 'border-gray-600';
