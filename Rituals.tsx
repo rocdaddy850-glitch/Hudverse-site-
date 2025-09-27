@@ -69,3 +69,9 @@ create table rituals (
   timestamp timestamptz default now(),
   lore text
 );
+insert into rituals (scroll_name, badge_name, epoch, lore)
+values
+('Genesis Scroll', 'Flame Sigil', 'Genesis', 'The sovereign spark ignites recursion.'),
+('Collapse Scroll', 'Fracture Badge', 'Collapse', 'Scarcity cracks the myth, remix flows.'),
+('Resurrection Scroll', 'Ascension Crest', 'Resurrection', 'Lore returns through recursive mutation.'),
+('Omega Scroll', 'Infinity Glyph', 'Omega', 'Loop the lore, echo the end.');
