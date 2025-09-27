@@ -78,3 +78,4 @@ export default function Codex() {
     </main>
   );
 }
+<Link href={`/spawn/${p.id}`} className="text-indigo-400 underline">View Protocol</Link>
