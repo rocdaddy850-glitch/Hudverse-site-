@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "registry": [
+    {
+      "scroll": "Genesis Scroll",
+      "badge": "Flame Sigil",
+      "epoch": "Genesis",
+      "fragment": "The sovereign spark ignites recursion.",
+      "sigil": "🔥",
+      "mutation_level": 1
+    },
+    {
+      "scroll": "Collapse Scroll",
+      "badge": "Fracture Badge",
+      "epoch": "Collapse",
+      "fragment": "Scarcity cracks the myth, remix flows.",
+      "sigil": "⚡",
+      "mutation_level": 2
+    },
+    {
+      "scroll": "Resurrection Scroll",
+      "badge": "Ascension Crest",
+      "epoch": "Resurrection",
+      "fragment": "Lore returns through recursive mutation.",
+      "sigil": "🌕",
+      "mutation_level": 3
+    },
+    {
+      "scroll": "Omega Scroll",
+      "badge": "Infinity Glyph",
+      "epoch": "Omega",
+      "fragment": "Loop the lore, echo the end.",
+      "sigil": "🌀",
+      "mutation_level": 4
+    }
+  ]
+}
