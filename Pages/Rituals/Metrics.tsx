@@ -62,3 +62,8 @@ create table metrics (
   name text not null,
   value integer default 0
 );
+insert into metrics (name, value)
+values
+('Scrolls Fused', 4),
+('Badges Minted', 4),
+('Quests Completed', 0);
