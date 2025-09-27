@@ -59,4 +59,4 @@ export default function LoreFeed() {
   <option value="Collapse">Collapse</option>
   <option value="Resurrection">Resurrection</option>
   <option value="Omega">Omega</option>
-</select>
+</const filteredRituals = rituals.filter(r => !epochFilter || r.scroll_name.includes(epochFilter));select>
