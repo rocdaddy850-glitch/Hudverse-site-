@@ -57,3 +57,8 @@ export default function RitualMetrics() {
     </main>
   );
 }
+create table metrics (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  value integer default 0
+);
