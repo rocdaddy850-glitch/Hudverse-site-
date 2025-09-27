@@ -62,3 +62,8 @@ create table quests (
   status text default 'active',
   reward text
 );
+insert into quests (title, reward)
+values
+('Echo the Genesis', 'Mutation +1'),
+('Fuse the Collapse', 'Badge unlocked'),
+('Ascend the Resurrection', 'Prophecy revealed');
