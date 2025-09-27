@@ -94,3 +94,15 @@ useEffect(() => {
     supabase.removeChannel(channel);
   };
 }, []);
+useEffect(() => {
+  const fetchEvents = async () => {
+    const { data, error } = await supabase
+      .from('rituals')
+      .select('*');
+
+    console.log('Supabase data:', data);
+    console.log('Supabase error:', error);
+  };
+
+  fetchEvents();
+}, []);
