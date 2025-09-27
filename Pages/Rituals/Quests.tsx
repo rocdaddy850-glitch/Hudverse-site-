@@ -56,3 +56,9 @@ export default function RitualQuests() {
     </main>
   );
 }
+create table quests (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  status text default 'active',
+  reward text
+);
