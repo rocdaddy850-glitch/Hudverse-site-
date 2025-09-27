@@ -38,3 +38,4 @@ export default function Dashboard() {
     </main>
   );
 }
+<Link href={`/spawn/${p.id}`} className="text-indigo-400 underline">Spawn View</Link>
