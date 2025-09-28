@@ -2,6 +2,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import HudOverlay from "../components/HudOverlay";
+import GsapDemo from "../components/GsapDemo";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -59,9 +61,11 @@ export default function Home() {
           <li className="tracking-[-.01em]">
             Save and see your changes instantly.
           </li>
-        </motion.ol>
+  </motion.ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  <GsapDemo />
+
+  <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -87,6 +91,7 @@ export default function Home() {
           </a>
         </div>
       </main>
+  <HudOverlay />
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
