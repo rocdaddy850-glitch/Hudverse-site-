@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## HUDverse additions
+
+This scaffold includes two small example components to help you get started with HUD-driven UIs and motion:
+
+- `components/HudOverlay.tsx` — a toggleable overlay HUD you can expand into your app's UI.
+- `components/GsapDemo.tsx` — a small GSAP demo that animates three color boxes on mount.
+
+Run the dev server and open http://localhost:3000 to see them in action. The HUD overlay button is in the bottom-right corner of the page.
