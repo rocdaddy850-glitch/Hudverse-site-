@@ -5,11 +5,12 @@ import GsapDemo from './GsapDemo';
 
 test('GsapDemo renders controls', async () => {
   render(<GsapDemo />);
-  expect(screen.getByText('Pause')).toBeInTheDocument();
-  expect(screen.getByText('Reverse')).toBeInTheDocument();
-  expect(screen.getByText('Replay')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /reverse/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /replay/i })).toBeInTheDocument();
 
   // basic interaction
-  const replay = screen.getByText('Replay');
-  await userEvent.click(replay);
+  const user = userEvent.setup();
+  const replay = screen.getByRole('button', { name: /replay/i });
+  await user.click(replay);
 });
