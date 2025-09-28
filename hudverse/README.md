@@ -43,3 +43,11 @@ This scaffold includes two small example components to help you get started with
 - `components/GsapDemo.tsx` — a small GSAP demo that animates three color boxes on mount.
 
 Run the dev server and open http://localhost:3000 to see them in action. The HUD overlay button is in the bottom-right corner of the page.
+
+### Dynamic HUD
+
+The HUD overlay now shows a mock metric and a timestamp that updates every 2 seconds. Use this to prototype live-updating HUD data.
+
+### GSAP demo controls
+
+The GSAP demo includes basic controls: Play/Pause and Reverse. Use them to experiment with timelines and create more complex sequences.
