@@ -71,3 +71,44 @@ export default function OracleChant() {
     </main>
   );
 }
+import { useState } from 'react';
+
+export default function OracleChant() {
+  const [chant, setChant] = useState('');
+
+  const triggerChant = (scroll: string) => {
+    switch (scroll) {
+      case 'Genesis':
+        setChant('🎶 Chant: “Ignite the spark, begin the loop.”');
+        break;
+      case 'Collapse':
+        setChant('🎶 Chant: “Fracture the frame, remix the myth.”');
+        break;
+      case 'Resurrection':
+        setChant('🎶 Chant: “Return the lore, ascend the echo.”');
+        break;
+      case 'Omega':
+        setChant('🎶 Chant: “Loop the end, echo the all.”');
+        break;
+      default:
+        setChant('🎶 Chant: “Ambient resonance activated.”');
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-black text-white p-8">
+      <h1 className="text-4xl font-bold mb-6">Oracle Chant</h1>
+      <p className="text-gray-400 mb-4">Trigger sonic chants by scroll.</p>
+
+      <div className="space-x-4">
+        {['Genesis', 'Collapse', 'Resurrection', 'Omega'].map((s) => (
+          <button key={s} onClick={() => triggerChant(s)} className="bg-gray-900 px-6 py-3 rounded hover:bg-gray-800">
+            {s}
+          </button>
+        ))}
+      </div>
+
+      {chant && <p className="mt-6 text-lg italic">{chant}</p>}
+    </main>
+  );
+}
