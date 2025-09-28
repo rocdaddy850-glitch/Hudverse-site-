@@ -60,6 +60,10 @@ CI notes:
 Troubleshooting:
  - If Playwright can't find browsers, run `npx playwright install` locally.
  - If the dev server fails due to Tailwind/PostCSS native bindings, see the README and consider pinning JS-only fallbacks.
+ 
+Note about unit test discovery
+--------------------------------
+The Vitest configuration has been intentionally restricted to only run unit tests under `components/` to avoid accidentally picking up E2E Playwright specs (which call Playwright's test() API and would crash Vitest when imported). If you add unit tests outside `components/`, update `vitest.config.ts` include globs accordingly.
 Running tests locally
 
 If you want to run the unit tests locally under the `hudverse` folder, follow these steps:
