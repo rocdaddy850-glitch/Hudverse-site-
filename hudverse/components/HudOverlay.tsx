@@ -65,6 +65,35 @@ export default function HudOverlay() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // cross-tab sync: listen for storage events and update HUD visibility
+  React.useEffect(() => {
+    // debounce updates from storage events to avoid rapid toggles across tabs
+    let timeout: number | null = null;
+    function onStorage(e: StorageEvent) {
+      try {
+        if (e.key === 'hud:visible') {
+          const newVal = e.newValue === 'true';
+          if (timeout) {
+            window.clearTimeout(timeout);
+          }
+          // batch updates in a small window (100ms)
+          timeout = window.setTimeout(() => {
+            setOpen(newVal);
+            timeout = null;
+          }, 100) as unknown as number;
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+
+    window.addEventListener('storage', onStorage);
+    return () => {
+      if (timeout) window.clearTimeout(timeout);
+      window.removeEventListener('storage', onStorage);
+    };
+  }, []);
+
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <button
@@ -90,7 +119,7 @@ export default function HudOverlay() {
           </div>
           <div className="mt-3 py-2 px-3 rounded bg-black/5 dark:bg-white/5 flex items-center justify-between">
             <div className="text-xs">Metric</div>
-            <div className="font-semibold">{metric}</div>
+            <div className="font-semibold" aria-live="polite">{metric}</div>
           </div>
         </div>
       )}
