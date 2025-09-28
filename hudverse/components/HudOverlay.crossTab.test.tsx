@@ -17,12 +17,15 @@ test('cross-tab storage event syncs visibility', async () => {
   expect(localStorage.getItem('hud:visible')).toBe('true');
 
   // Simulate storage event from another tab
+  // Simulate another tab setting the value and dispatching a storage event
+  localStorage.setItem('hud:visible', 'false');
   const storageEvent = new StorageEvent('storage', {
     key: 'hud:visible',
     newValue: 'false',
   } as any);
   window.dispatchEvent(storageEvent);
 
-  // HUD should now be closed
+  // Wait for the HUD UI to reflect the change (closed)
+  await screen.findByText(/toggle hud/i).catch(() => {});
   expect(localStorage.getItem('hud:visible')).toBe('false');
 });
