@@ -1,12 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test('cross-tab storage sync toggles HUD', async ({ browser }) => {
-  // Create two contexts to simulate two tabs
-  const contextA = await browser.newContext();
-  const contextB = await browser.newContext();
-
-  const pageA = await contextA.newPage();
-  const pageB = await contextB.newPage();
+  // Create one context and two pages to simulate two tabs (they share localStorage)
+  const context = await browser.newContext();
+  const pageA = await context.newPage();
+  const pageB = await context.newPage();
 
   // Navigate both to local dev server (adjust host/port as needed)
   await pageA.goto('http://localhost:3000');
@@ -15,21 +13,21 @@ test('cross-tab storage sync toggles HUD', async ({ browser }) => {
   // Ensure HUD button exists in A and click to open
   const btnA = await pageA.getByRole('button', { name: /toggle hud/i });
   await btnA.click();
+  // The first page should set localStorage; the other page should observe the HUD open.
+  const btnB = await pageB.getByRole('button', { name: /toggle hud/i });
 
-  // The first page should set localStorage; now simulate storage event by writing in pageB
-  await pageB.evaluate(() => {
-    localStorage.setItem('hud:visible', 'false');
-    // Dispatch storage event on window
-    window.dispatchEvent(new StorageEvent('storage', { key: 'hud:visible', newValue: 'false' } as any));
-  });
+  // Wait until pageB shows the HUD opened (button text becomes 'Hide HUD')
+  await expect(pageB.getByRole('button', { name: /hide hud/i })).toBeVisible();
 
-  // Allow some time for debounced handler
-  await pageA.waitForTimeout(200);
+  // Now click the button in pageB to close the HUD (this writes localStorage and triggers storage event in pageA)
+  await (await pageB.getByRole('button', { name: /hide hud/i })).click();
 
-  // Now check pageA no longer shows HUD content
-  const hud = await pageA.locator('#hud-overlay');
-  await expect(hud).toHaveCount(0);
+  // Allow debounce window to elapse
+  await pageA.waitForTimeout(400);
 
-  await contextA.close();
-  await contextB.close();
+  // Now assert the toggle button in pageA shows the closed state (label 'Show HUD')
+  const closedBtn = await pageA.getByRole('button', { name: /show hud/i });
+  await expect(closedBtn).toBeVisible();
+
+  await context.close();
 });
