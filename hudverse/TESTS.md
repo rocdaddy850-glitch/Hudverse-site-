@@ -1,3 +1,69 @@
+# Running tests for hudverse
+
+## Unit tests (Vitest)
+
+1. Install dependencies:
+
+```bash
+cd hudverse
+npm ci
+```
+
+2. Run unit tests:
+
+```bash
+npm run test:hudverse
+```
+
+## E2E tests (Playwright)
+
+1. Install Playwright browsers:
+
+```bash
+npx playwright install
+```
+
+2. Run E2E tests headless:
+
+```bash
+npm run e2e
+```
+
+## CI notes
+
+- The repository contains a GitHub Actions workflow at `.github/workflows/hudverse-playwright-e2e.yml`.
+- The workflow builds the app, starts it, installs Playwright browsers, and runs E2E tests headless.
+
+## Troubleshooting
+
+- If Playwright can't find browsers, run `npx playwright install` locally.
+- If the dev server fails due to Tailwind/PostCSS native bindings, see the README and consider pinning JS-only fallbacks.
+Running tests for hudverse
+
+Unit tests (Vitest):
+
+  npm ci
+  npm run test:hudverse
+
+E2E tests (Playwright):
+
+  # install browsers first
+  npx playwright install
+
+  # run all e2e tests headless
+  npm run e2e
+
+CI notes:
+ - The repository contains a GitHub Actions workflow at .github/workflows/hudverse-playwright-e2e.yml
+ - The workflow builds the app, starts it, installs Playwright browsers, and runs e2e tests headless.
+
+Troubleshooting:
+ - If Playwright can't find browsers, run `npx playwright install` locally.
+ - If the dev server fails due to Tailwind/PostCSS native bindings, see the README and consider pinning JS-only fallbacks.
+ 
+Note about unit test discovery
+--------------------------------
+The Vitest configuration has been intentionally restricted to only run unit tests under `components/` to avoid accidentally picking up E2E Playwright specs (which call Playwright's test() API and would crash Vitest when imported). If you add unit tests outside `components/`, update `vitest.config.ts` include globs accordingly.
 Running tests locally
 
 If you want to run the unit tests locally under the `hudverse` folder, follow these steps:
