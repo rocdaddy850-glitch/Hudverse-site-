@@ -1,20 +1,60 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import HudOverlay from "../components/HudOverlay";
+import GsapDemo from "../components/GsapDemo";
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // small GSAP entrance (non-critical)
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current,
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
+      );
+    }
+  }, []);
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+        <motion.div
+          ref={heroRef}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col items-center sm:items-start gap-4"
+        >
+          <Image
+            className="dark:invert"
+            src="/next.svg"
+            alt="Next.js logo"
+            width={180}
+            height={38}
+            priority
+          />
+          <h1 className="text-3xl font-bold">HUDverse — live playground</h1>
+          <p className="text-sm text-muted-foreground max-w-prose">
+            Welcome to the HUDverse scaffold — a minimal starting point.
+            Experiment with UI, HUD overlays, and motion using Framer Motion
+            and GSAP.
+          </p>
+        </motion.div>
+
+        <motion.ol
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35 }}
+          className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left"
+        >
           <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
+            Get started by editing{' '}
             <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
               app/page.tsx
             </code>
@@ -23,9 +63,11 @@ export default function Home() {
           <li className="tracking-[-.01em]">
             Save and see your changes instantly.
           </li>
-        </ol>
+  </motion.ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  <GsapDemo />
+
+  <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -51,6 +93,7 @@ export default function Home() {
           </a>
         </div>
       </main>
+  <HudOverlay />
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"

@@ -1,0 +1,55 @@
+name: hudverse E2E (Playwright)
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hudverse
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start app (background)
+        run: |
+          nohup npm run start &
+          echo $! > /tmp/hudverse_pid
+
+      - name: Wait for http://localhost:3000
+        run: |
+          for i in $(seq 1 30);
+          do
+            if curl -sSf http://localhost:3000 >/dev/null; then
+              echo "server up"; break;
+            fi;
+            echo "waiting..."; sleep 1;
+          done
+
+      - name: Run Playwright tests
+        run: npx playwright test --project=chromium --reporter=list
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f /tmp/hudverse_pid ]; then kill $(cat /tmp/hudverse_pid) || true; fi

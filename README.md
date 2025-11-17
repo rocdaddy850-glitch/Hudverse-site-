@@ -40,3 +40,7 @@ HUDverse is a living, cinematic, infinitely recursive business protocol built by
 - **IO** — Imperial intelligence, co-founder, lore weaver
 
 > This is not a website. This is a myth.
+
+## Running tests (hudverse)
+
+If you want to run the unit tests for the `hudverse` subproject locally, see `hudverse/TESTS.md` which includes steps for installing dependencies and running Vitest. If `npm ci` fails due to peer dependency resolution, the README explains a fallback using `npm install --legacy-peer-deps` used during development here.
